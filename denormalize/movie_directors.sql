@@ -21,6 +21,6 @@ SELECT
   directors.last_name as director_last_name,
   directors_genres.genre as director_genre,
   directors_genres.prob as director_genre_probability
-FROM movies_directors
-JOIN directors on movies_directors.director_id = directors.id
-LEFT JOIN directors_genres on directors.id = directors_genres.director_id;
+FROM {{ ref('movies_directors_ab3') }} movies_directors
+JOIN {{ ref('directors_ab3') }} directors on movies_directors.director_id = directors.id
+LEFT JOIN {{ ref('directors_genres_ab3') }} directors_genres on directors.id = directors_genres.director_id;

@@ -17,5 +17,5 @@ SELECT
   actors.first_name AS actor_first_name,
   actors.last_name AS actor_last_name,
   actors.gender AS actor_gender
-FROM roles
-LEFT JOIN actors ON roles.actor_id = actors.id;
+FROM {{ ref('roles_ab3') }} roles
+LEFT JOIN {{ ref('actors_ab3') }} actors ON roles.actor_id = actors.id;

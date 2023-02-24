@@ -23,7 +23,7 @@ target-path: "target"  # directory which will store compiled SQL files
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
-modules-path: "../dbt_modules"
+modules-path: "../dbt_packages"
 
 
 # Configuring models
@@ -37,6 +37,6 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
-      
+
 vars:
   dbt_utils_dispatch_list: ['airbyte_utils']

@@ -1,0 +1,17 @@
+config:
+  partial_parse: true
+  printer_width: 120
+  send_anonymous_usage_stats: false
+  use_colors: true
+
+normalize:
+  target: prod
+  outputs:
+    prod:
+      database: imdb_denorm
+      password: '12345678'
+      port: 3306
+      schema: imdb_denorm
+      server: 192.168.100.225
+      type: mysql
+      username: airbyte

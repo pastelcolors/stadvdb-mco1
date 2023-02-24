@@ -15,12 +15,12 @@
 }}
 
 SELECT
-  movies_directors.movie_id,
-  directors.id as director_id,
-  directors.first_name as director_first_name,
-  directors.last_name as director_last_name,
-  directors_genres.genre as director_genre,
-  directors_genres.prob as director_genre_probability
-FROM {{ ref('movies_directors_ab3') }} movies_directors
-JOIN {{ ref('directors_ab3') }} directors on movies_directors.director_id = directors.id
-LEFT JOIN {{ ref('directors_genres_ab3') }} directors_genres on directors.id = directors_genres.director_id;
+  movies_directors.movie_id as `movie_id`,
+  directors.id as `director_id`,
+  directors.first_name as `first_name`,
+  directors.last_name as `last_name`,
+  directors_genres.genre as `genre`,
+  directors_genres.prob as `prob`
+FROM imdb_denorm.movies_directors movies_directors
+JOIN imdb_denorm.directors directors on movies_directors.director_id = directors.id
+LEFT JOIN imdb_denorm.directors_genres directors_genres on directors.id = directors_genres.director_id

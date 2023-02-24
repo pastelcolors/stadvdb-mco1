@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: denormalize
+    description: 'Transformation to denormalize movie directors and role actors.'
+    database: mco1_a
+    schema: mco1_a
+    tables:
+      - name: movie_directors
+        description: 'Movie directors'
+        # 'director_id': 'int',
+        # 'movie_id': 'int',
+        # 'first_name': 'varchar(100)',
+        # 'last_name': 'varchar(100)',
+        # 'genre': 'varchar(100)',
+        # 'prob': 'float'
+        columns:
+          - name: director_id
+            description: 'Director ID'
+          - name: movie_id
+            description: 'Movie ID'
+          - name: first_name
+            description: 'Director first name'
+          - name: last_name
+            description: 'Director last name'
+            tests:
+              - not_null
+          - name: genre
+            description: 'Movie genre'
+          - name: prob
+      - name: role_actors
+        description: 'Role actors'
+        # 'movie_id': 'varchar(100)',
+        # 'role': 'varchar(100)',
+        # 'actor_first_name': 'varchar(100)',
+        # 'actor_last_name': 'varchar(100)',
+        # 'actor_gender': 'char(1)'
+        columns:
+          - name: movie_id
+            description: 'Movie ID'
+          - name: role
+            description: 'Role'
+          - name: actor_first_name
+            description: 'Actor first name'
+          - name: actor_last_name
+            description: 'Actor last name'
+          - name: actor_gender
+            description: 'Actor gender'

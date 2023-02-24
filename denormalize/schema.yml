@@ -24,6 +24,9 @@ sources:
       - name: roles
         identifier: roles
         
+      - name: movies_genres
+        identifier: movies_genres
+
       - name: movie_directors
         description: 'Movie directors'
         # 'director_id': 'int',
@@ -35,8 +38,15 @@ sources:
         columns:
           - name: director_id
             description: 'Director ID'
+            tests:
+              - unique
+              - not null
           - name: movie_id
             description: 'Movie ID'
+            tests:
+              - relationships:
+                  to: source('denormalize', 'movies')
+                  field: id
           - name: first_name
             description: 'Director first name'
           - name: last_name
@@ -57,6 +67,10 @@ sources:
         columns:
           - name: movie_id
             description: 'Movie ID'
+            tests:
+              - relationships:
+                  to: source('denormalize', 'movies')
+                  field: id
           - name: role
             description: 'Role'
           - name: actor_first_name

@@ -8,10 +8,10 @@ normalize:
   target: prod
   outputs:
     prod:
-      database: imdb_denorm
+      database: imdb_test
       password: '12345678'
       port: 3306
-      schema: imdb_denorm
+      schema: imdb_test
       server: 192.168.100.225
       type: mysql
       username: airbyte

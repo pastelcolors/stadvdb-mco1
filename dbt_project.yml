@@ -40,3 +40,9 @@ models:
 
 vars:
   dbt_utils_dispatch_list: ['airbyte_utils']
+  dbt_constraints_enabled: true
+  
+sources:
+  dbt_constraints_sources_pk_enabled: true
+  dbt_constraints_sources_uk_enabled: true
+  dbt_constraints_sources_fk_enabled: true

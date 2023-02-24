@@ -3,9 +3,27 @@ version: 2
 sources:
   - name: denormalize
     description: 'Transformation to denormalize movie directors and role actors.'
-    database: mco1_a
-    schema: mco1_a
+    database: imdb_test
+    schema: imdb_test
     tables:
+      - name: movies
+        identifier: movies
+
+      - name: movies_directors
+        identifier: movies_directors
+
+      - name: actors
+        identifier: actors
+
+      - name: directors_genres
+        identifier: directors_genres
+      
+      - name: directors
+        identifier: directors
+      
+      - name: roles
+        identifier: roles
+        
       - name: movie_directors
         description: 'Movie directors'
         # 'director_id': 'int',
@@ -28,6 +46,7 @@ sources:
           - name: genre
             description: 'Movie genre'
           - name: prob
+        
       - name: role_actors
         description: 'Role actors'
         # 'movie_id': 'varchar(100)',

@@ -17,5 +17,7 @@ SELECT
   actors.first_name AS `actor_first_name`,
   actors.last_name AS `actor_last_name`,
   actors.gender AS `actor_gender`
-FROM imdb_denorm.roles roles
-LEFT JOIN imdb_denorm.actors actors ON roles.actor_id = actors.id
+FROM imdb_test.roles roles
+LEFT JOIN imdb_test.actors actors ON roles.actor_id = actors.id
+
+

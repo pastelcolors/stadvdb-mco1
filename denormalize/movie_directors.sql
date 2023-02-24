@@ -21,6 +21,6 @@ SELECT
   directors.last_name as `last_name`,
   directors_genres.genre as `genre`,
   directors_genres.prob as `prob`
-FROM imdb_denorm.movies_directors movies_directors
-JOIN imdb_denorm.directors directors on movies_directors.director_id = directors.id
-LEFT JOIN imdb_denorm.directors_genres directors_genres on directors.id = directors_genres.director_id
+FROM imdb_test.movies_directors movies_directors
+JOIN imdb_test.directors directors on movies_directors.director_id = directors.id
+LEFT JOIN imdb_test.directors_genres directors_genres on directors.id = directors_genres.director_id

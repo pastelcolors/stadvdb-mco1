@@ -1,3 +1,6 @@
+### Run 
+DBT_DB_SCHEMA=< value > DBT_DB_USER=< value > DBT_DB_PASSWORD=< value > DBT_SERVER=< value > dbt run --profiles-dir .
+
 Welcome to your new dbt project!
 
 ### Using the starter project

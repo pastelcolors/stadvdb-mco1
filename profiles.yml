@@ -8,10 +8,10 @@ normalize:
   target: prod
   outputs:
     prod:
-      database: imdb_test
-      password: '12345678'
+      database: "{{ env_var('DBT_DB_SCHEMA') }}"
+      password: "{{ env_var('DBT_DB_PASSWORD') }}"
       port: 3306
-      schema: imdb_test
-      server: 192.168.100.225
+      schema: "{{ env_var('DBT_DB_SCHEMA') }}"
+      server: "{{ env_var('DBT_SERVER') }}"
       type: mysql
-      username: airbyte
+      username: "{{ env_var('DBT_DB_USER') }}"

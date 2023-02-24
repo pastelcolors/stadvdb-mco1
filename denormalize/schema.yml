@@ -3,8 +3,8 @@ version: 2
 sources:
   - name: denormalize
     description: 'Transformation to denormalize movie directors and role actors.'
-    database: imdb_test
-    schema: imdb_test
+    database: "{{ env_var('DBT_DB_SCHEMA') }}"
+    schema: "{{ env_var('DBT_DB_SCHEMA') }}"
     tables:
       - name: movies
         identifier: movies

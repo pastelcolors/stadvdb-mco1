@@ -2,7 +2,7 @@
 {{
   config(
     materialized='table',
-    unique_key='(director_id, movie_id)',
+    unique_key='(director_id, movie_id, genre)',
     columns={
       'director_id': 'int',
       'movie_id': 'int',
@@ -15,12 +15,12 @@
 }}
 
 SELECT
-  movies_directors.movie_id as `movie_id`,
-  directors.id as `director_id`,
-  directors.first_name as `first_name`,
-  directors.last_name as `last_name`,
-  directors_genres.genre as `genre`,
-  directors_genres.prob as `prob`
+  CAST(movies_directors.movie_id AS SIGNED) as `movie_id`,
+  CAST(directors.id AS SIGNED) as `director_id`,
+  CAST(directors.first_name AS CHAR(100)) as `first_name`,
+  CAST(directors.last_name AS CHAR(100)) as `last_name`,
+  CAST(directors_genres.genre AS CHAR(100)) as `genre`,
+  CAST(directors_genres.prob AS FLOAT) as `prob`
 FROM {{ source('denormalize', 'movies_directors') }} movies_directors
 JOIN {{ source('denormalize', 'directors') }} directors on movies_directors.director_id = directors.id
 LEFT JOIN {{ source('denormalize', 'directors_genres') }} directors_genres on directors.id = directors_genres.director_id

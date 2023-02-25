@@ -12,6 +12,7 @@
 ) }}
 
 SELECT 
+  roles.actor_id AS `actor_id`,
   roles.movie_id as `movie_id`,
   roles.role as `role`,
   actors.first_name AS `actor_first_name`,

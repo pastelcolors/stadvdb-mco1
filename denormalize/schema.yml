@@ -7,7 +7,10 @@ sources:
     schema: "{{ var('DBT_DB_SCHEMA') }}"
     tables:
       - name: movies
-        identifier: movies
+        identifier: 
+        
+      - name: fact_movies
+        identifier: fact_movies
 
       - name: movies_directors
         identifier: movies_directors
@@ -26,6 +29,9 @@ sources:
         
       - name: movies_genres
         identifier: movies_genres
+
+      - name: dim_movies_genres
+        identifier: dim_movies_genres
 
       - name: movie_directors
         description: 'Movie directors'

@@ -37,9 +37,9 @@ models:
     +materialized: table
   role_actors:
     +materialized: table
-  movies_genres:
+  dim_movies_genres:
     +materialized: table
-  movies:
+  fact_movies:
     +materialized: table
   tables_remove:
     +materialized: ephemeral
@@ -55,3 +55,12 @@ sources:
   dbt_constraints_sources_pk_enabled: true
   dbt_constraints_sources_uk_enabled: true
   dbt_constraints_sources_fk_enabled: true
+
+on-run-end:
+  - "{{ add_primary_key_constraint('fact_movies', 'id, director_id, actor_id, genre_id') }}"
+  - "{{ add_primary_key_constraint('movie_directors', 'director_id, movie_id, genre') }}"
+  - "{{ add_primary_key_constraint('role_actors', 'actor_id, movie_id, role') }}"
+  - "{{ add_primary_key_constraint('dim_movies_genres', 'genre_id') }}"
+  - "{{ add_foreign_key_constraint('movie_directors', 'director_id', 'fact_movies', 'director_id') }}"
+  - "{{ add_foreign_key_constraint('dim_movies_genres', 'genre_id', 'fact_movies', 'genre_id') }}"
+  - "{{ add_foreign_key_constraint('role_actors', 'actor_id', 'fact_movies', 'actor_id') }}"

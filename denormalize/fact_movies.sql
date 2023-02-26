@@ -15,6 +15,7 @@
 }}
 
 SELECT
+  DISTINCT
   CAST(movies.id AS SIGNED) as `id`,
   CAST(md.director_id AS SIGNED) as `director_id`,
   CAST(ra.actor_id AS SIGNED) as `actor_id`,
@@ -25,4 +26,4 @@ SELECT
 FROM {{ source('denormalize', 'movies') }} movies
 JOIN {{ ref('movie_directors') }} md ON md.movie_id = movies.id 
 JOIN {{ ref('role_actors') }} ra ON ra.movie_id = movies.id 
-JOIN {{ ref('movies_genres') }} mg ON mg.movie_id = movies.id 
+JOIN {{ ref('dim_movies_genres') }} mg ON mg.movie_id = movies.id 

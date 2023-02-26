@@ -23,4 +23,4 @@ SELECT
   CAST(directors_genres.prob AS FLOAT) as `prob`
 FROM {{ source('denormalize', 'movies_directors') }} movies_directors
 JOIN {{ source('denormalize', 'directors') }} directors on movies_directors.director_id = directors.id
-LEFT JOIN {{ source('denormalize', 'directors_genres') }} directors_genres on directors.id = directors_genres.director_id
+JOIN {{ source('denormalize', 'directors_genres') }} directors_genres on directors.id = directors_genres.director_id

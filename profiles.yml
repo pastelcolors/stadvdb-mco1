@@ -8,10 +8,10 @@ normalize:
   target: prod
   outputs:
     prod:
+      type: mysql
       database: "{{ var('DBT_DB_SCHEMA') }}"
       password: "{{ var('DBT_DB_PASSWORD') }}"
       port: 3306
       schema: "{{ var('DBT_DB_SCHEMA') }}"
       server: "{{ var('DBT_SERVER') }}"
-      type: mysql
       username: "{{ var('DBT_DB_USER') }}"

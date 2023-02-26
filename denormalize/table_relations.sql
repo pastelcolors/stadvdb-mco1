@@ -4,8 +4,7 @@
   )
 }}
 
-{{ add_primary_key_constraint('movies', 'id, genre_id, director_id') }}
-
+{{ add_primary_key_constraint('movies', 'id, genre_id, director_id, actor_id') }}
 
 {{ add_primary_key_constraint('movie_directors', 'director_id, movie_id, genre') }}
 

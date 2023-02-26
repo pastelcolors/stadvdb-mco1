@@ -14,5 +14,5 @@ SELECT
   CAST(movies.id AS SIGNED) as `id`,
   CAST(movies.name AS CHAR(100)) as `name`,
   CAST(movies.rank AS FLOAT) as `rank`,
-  CAST(movies.year AS SIGNED) as `year`,
+  CAST(movies.year AS SIGNED) as `year`
 FROM {{ source('denormalize', 'movies') }} movies

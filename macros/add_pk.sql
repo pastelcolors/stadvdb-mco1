@@ -1,7 +1,7 @@
 {% macro add_primary_key_constraint(tbl, col) %}
   {% set relation_query %}
 
-    ALTER TABLE {{ source('denormalize', tbl) }}
+    ALTER TABLE {{ ref(tbl) }}
     ADD PRIMARY KEY ({{ col }});
 
   {% endset %}

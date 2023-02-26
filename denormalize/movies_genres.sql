@@ -11,7 +11,7 @@
 }}
 
 SELECT
-  CAST(UUID() AS CHAR(100)) AS `genre_id`
+  CAST(UUID() AS CHAR(100)) AS `genre_id`,
   CAST(movies_genres.genre AS CHAR(100)) as `genre`,
   CAST(movies_genres.movie_id AS SIGNED) as `movie_id`
 FROM {{ source('denormalize', 'movies_genres') }} movies_genres

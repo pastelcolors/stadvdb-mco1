@@ -10,7 +10,7 @@
 
 {{ add_primary_key_constraint('role_actors', 'actor_id, movie_id, role') }}
 
-{{ add_primary_key_constraint('movies_genres', 'movie_id, genre') }}
+{{ add_primary_key_constraint('movies_genres', 'genre_id') }}
 
 {{ add_foreign_key_constraint('movies', 'id', 'movie_directors', 'movie_id') }}
 

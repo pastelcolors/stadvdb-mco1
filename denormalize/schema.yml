@@ -3,9 +3,36 @@ version: 2
 sources:
   - name: denormalize
     description: 'Transformation to denormalize movie directors and role actors.'
-    database: mco1_a
-    schema: mco1_a
+    database: "{{ var('DBT_DB_SCHEMA') }}"
+    schema: "{{ var('DBT_DB_SCHEMA') }}"
     tables:
+      - name: movies
+        identifier: 
+        
+      - name: fact_movies
+        identifier: fact_movies
+
+      - name: movies_directors
+        identifier: movies_directors
+
+      - name: actors
+        identifier: actors
+
+      - name: directors_genres
+        identifier: directors_genres
+      
+      - name: directors
+        identifier: directors
+      
+      - name: roles
+        identifier: roles
+        
+      - name: movies_genres
+        identifier: movies_genres
+
+      - name: dim_movies_genres
+        identifier: dim_movies_genres
+
       - name: movie_directors
         description: 'Movie directors'
         # 'director_id': 'int',
@@ -17,8 +44,15 @@ sources:
         columns:
           - name: director_id
             description: 'Director ID'
+            tests:
+              - unique
+              - not null
           - name: movie_id
             description: 'Movie ID'
+            tests:
+              - relationships:
+                  to: source('denormalize', 'movies')
+                  field: id
           - name: first_name
             description: 'Director first name'
           - name: last_name
@@ -28,6 +62,7 @@ sources:
           - name: genre
             description: 'Movie genre'
           - name: prob
+        
       - name: role_actors
         description: 'Role actors'
         # 'movie_id': 'varchar(100)',
@@ -38,6 +73,10 @@ sources:
         columns:
           - name: movie_id
             description: 'Movie ID'
+            tests:
+              - relationships:
+                  to: source('denormalize', 'movies')
+                  field: id
           - name: role
             description: 'Role'
           - name: actor_first_name

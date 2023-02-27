@@ -7,12 +7,12 @@ version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'stadvdb_imdb'
+profile: 'normalize'
 
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
-model-paths: ["models"]
+model-paths: ["denormalize"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
 seed-paths: ["seeds"]
@@ -24,6 +24,7 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+packages-install-path: dbt_packages
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -32,7 +33,34 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  stadvdb_imdb:
-    # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+  movie_directors:
+    +materialized: table
+  role_actors:
+    +materialized: table
+  dim_movies_genres:
+    +materialized: table
+  fact_movies:
+    +materialized: table
+  tables_remove:
+    +materialized: ephemeral
+  table_relations:
+    +materialized: ephemeral
+
+
+vars:
+  dbt_utils_dispatch_list: ['airbyte_utils']
+  dbt_constraints_enabled: true
+  
+sources:
+  dbt_constraints_sources_pk_enabled: true
+  dbt_constraints_sources_uk_enabled: true
+  dbt_constraints_sources_fk_enabled: true
+
+on-run-end:
+  - "{{ add_primary_key_constraint('fact_movies', 'id, director_id, actor_id, genre_id') }}"
+  - "{{ add_primary_key_constraint('movie_directors', 'director_id, movie_id, genre') }}"
+  - "{{ add_primary_key_constraint('role_actors', 'actor_id, movie_id, role') }}"
+  - "{{ add_primary_key_constraint('dim_movies_genres', 'genre_id') }}"
+  - "{{ add_foreign_key_constraint('movie_directors', 'director_id', 'fact_movies', 'director_id') }}"
+  - "{{ add_foreign_key_constraint('dim_movies_genres', 'genre_id', 'fact_movies', 'genre_id') }}"
+  - "{{ add_foreign_key_constraint('role_actors', 'actor_id', 'fact_movies', 'actor_id') }}"
